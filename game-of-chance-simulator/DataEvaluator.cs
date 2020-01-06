@@ -18,5 +18,6 @@ namespace GameOfChanceSimulator
 {
     class DataEvaluator
     {
+               
     }
 }
