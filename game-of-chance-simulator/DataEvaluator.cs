@@ -18,6 +18,10 @@ namespace GameOfChanceSimulator
 {
     class DataEvaluator
     {
-               
+        DataEvaluator(HistoricalDataSet historical, ILogger logger)
+        {
+        }
+
+        
     }
 }

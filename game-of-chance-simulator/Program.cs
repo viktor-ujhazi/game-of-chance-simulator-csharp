@@ -13,6 +13,9 @@ namespace GameOfChanceSimulator
     {
         static void Main(string[] args)
         {
+            ConsoleLogger t = new ConsoleLogger();
+            t.Error("Hiba");
+            t.Info("Valami");
         }
     }
 }

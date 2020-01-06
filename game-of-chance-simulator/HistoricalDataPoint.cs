@@ -13,5 +13,6 @@ namespace GameOfChanceSimulator
 {
     class HistoricalDataPoint
     {
+        int Number { get; set; }
     }
 }
