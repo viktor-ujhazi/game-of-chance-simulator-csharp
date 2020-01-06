@@ -23,5 +23,10 @@ namespace GameOfChanceSimulator
         int NumberOfSimulations { get; set; }
         string BestChoice { get; set; }
         float BestChoiceChance { get; set; }
+
+        Result(int a)
+        {
+
+        }
     }
 }
