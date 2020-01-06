@@ -25,16 +25,35 @@ namespace GameOfChanceSimulator
     class HistoricalDataSet
     {
         int Size { get; set; }
-        IReadOnlyList<HistoricalDataPoint> DataPoints;
+        int[] MyList;
+        private List<HistoricalDataPoint> dataPoints;
+        IReadOnlyList<HistoricalDataPoint> DataPoints { get { return dataPoints.AsReadOnly(); } }
 
         public HistoricalDataSet(ILogger ilog)
         {
 
         }
 
+        public HistoricalDataSet(int size)
+        {
+            this.Size = size;
+            int[] MyList = new int[size];
+        }
+
         public void Generate()
         {
+            var rand = new Random();
+            for (int i = 0; i < 6; i++)
+                //MyList[i] = rand.Next();
+                dataPoints.Add(rand.Next(1, 100));
+            dataPoints[i] = rand.Next();
 
+            dataPoints.Add
+        }
+
+        public void Load()
+        {
+            string filename = "history.csv";
         }
 
     }
