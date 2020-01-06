@@ -14,7 +14,32 @@ using System.Text;
 
 namespace GameOfChanceSimulator
 {
-    class ConsoleLogger
+    class ConsoleLogger : ILogger
     {
+        public void Error(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("ERROR ");
+            Console.ResetColor();
+            Console.Write(DateTime.Now +":");
+            
+            Console.Write( message);
+            Console.WriteLine();
+        }
+
+        public void Info(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("INFO ");
+            Console.ResetColor();
+            Console.Write(DateTime.Now + ":");
+
+            Console.Write(message);
+            Console.WriteLine();
+        }
+
+        public ConsoleLogger() 
+        {
+        }
     }
 }
