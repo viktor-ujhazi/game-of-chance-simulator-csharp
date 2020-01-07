@@ -51,9 +51,11 @@ namespace GameOfChanceSimulator
             string filename = "history.csv";
             String[] table = System.IO.File.ReadAllLines(filename);
             logger.Info($"Number of simulations: {table.Length}");
+            string[] winner = CountWinRatio(filename);
+            logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}");
         }
 
-        public Dictionary<string, float> CountWinRatio(string filename)
+        public string[] CountWinRatio(string filename)
         {
             String[] table = System.IO.File.ReadAllLines(filename);
             IDictionary<string, int> myDict = new Dictionary<string, int>();
@@ -74,13 +76,21 @@ namespace GameOfChanceSimulator
                 }
             }
 
-            int sum = 0;
-            Dictionary<string, int> winner = new Dictionary<string, int>();
+            float sum = 0;
+            string win_name = "";
+            int win_points = 0;
             foreach (KeyValuePair<string, int> key in myDict)
             {
                 sum += key.Value;
-
+                if (key.Value > win_points)
+                {
+                    win_name = key.Key;
+                    win_points = key.Value;
+                }
             }
+
+            string[] result = {win_name, (win_points/sum *100).ToString()};
+            return result;
         }
     }
 }
