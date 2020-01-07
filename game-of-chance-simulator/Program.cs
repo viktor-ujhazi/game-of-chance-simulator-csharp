@@ -7,17 +7,36 @@
  
  */
 
+using System;
+using System.Collections.Generic;
+
 namespace GameOfChanceSimulator
 {
     class Program
     {
         static void Main(string[] args)
         {
-        }
+            HistoricalDataSet dataSet = GenerateHistoricalDataSet(Int32.Parse(args[1]));
 
-        public static HistoricalDataSet GenerateHistoricalDataSet(string[] input)
+        }
+        
+        public static HistoricalDataSet GenerateHistoricalDataSet(int input)
         {
-            
+            ConsoleLogger logger = new ConsoleLogger();
+            HistoricalDataSet dataSet = new HistoricalDataSet(logger);
+
+            if (input > 0)
+            {
+                logger.Info($"Generating {input} rounds of data.");
+                for (int i = 0; i < input; i++)
+                {
+                    logger.Info("Generating 1 round of data.");
+                    dataSet.Generate();
+                }
+                logger.Info($"Generated {input} rounds of data.");
+            }
+            else
+                return dataSet.Load();
         }
     }
 }

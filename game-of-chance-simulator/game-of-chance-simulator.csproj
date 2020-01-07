@@ -5,4 +5,10 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>GameOfChanceSimulator</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="Try.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

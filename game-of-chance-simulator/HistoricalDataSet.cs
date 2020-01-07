@@ -29,20 +29,19 @@ namespace GameOfChanceSimulator
         private List<HistoricalDataPoint> dataPoints;
         IReadOnlyList<HistoricalDataPoint> DataPoints { get { return dataPoints.AsReadOnly(); } }
 
-        public HistoricalDataSet(ILogger ilog)
-        {
+        private ILogger logger;
 
-        }
-
-        public HistoricalDataSet(int size)
+        public HistoricalDataSet(ILogger logger)
         {
-            this.size = size;
+            this.logger = logger;
         }
 
         public void Generate()
         {
-            ConsoleLogger console = new ConsoleLogger();
-            console.Info("");
+            
+
+
+            //logger.Info("");
             //var randomString = strings.PickRandom();
 
         }
@@ -50,7 +49,38 @@ namespace GameOfChanceSimulator
         public void Load()
         {
             string filename = "history.csv";
+            String[] table = System.IO.File.ReadAllLines(filename);
+            logger.Info($"Number of simulations: {table.Length}");
         }
 
+        public Dictionary<string, float> CountWinRatio(string filename)
+        {
+            String[] table = System.IO.File.ReadAllLines(filename);
+            IDictionary<string, int> myDict = new Dictionary<string, int>();
+
+            foreach (string line in table)
+            {
+                List<string> temp = new List<string>(line.Split(" "));
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    if (temp[i] == "Ranking:")
+                    {
+                        if (myDict.ContainsKey(temp[i + 1]))
+                            myDict[temp[i + 1]]++;
+                        else
+                            myDict.Add(new KeyValuePair<string, int>(temp[i + 1], 1));
+                        break;
+                    }
+                }
+            }
+
+            int sum = 0;
+            Dictionary<string, int> winner = new Dictionary<string, int>();
+            foreach (KeyValuePair<string, int> key in myDict)
+            {
+                sum += key.Value;
+
+            }
+        }
     }
 }
