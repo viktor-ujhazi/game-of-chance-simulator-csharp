@@ -13,7 +13,6 @@ namespace GameOfChanceSimulator
     {
         static void Main(string[] args)
         {
-
         }
 
         public static HistoricalDataSet GenerateHistoricalDataSet(string[] input)
