@@ -15,5 +15,10 @@ namespace GameOfChanceSimulator
         {
 
         }
+
+        public static HistoricalDataSet GenerateHistoricalDataSet(string[] input)
+        {
+            
+        }
     }
 }
