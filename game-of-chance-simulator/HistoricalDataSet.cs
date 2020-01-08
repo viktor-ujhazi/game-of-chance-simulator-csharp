@@ -74,7 +74,7 @@ namespace GameOfChanceSimulator
 
             foreach (HistoricalDataPoint line in table)
             {
-                List<string> temp = new List<string>(line.Ranking);
+                List<string> temp = new List<string>(line.Ranking.Split(";"));
                 for (int i = 0; i < temp.Count; i++)
                 {
                     if (myDict.ContainsKey(temp[i]))
