@@ -55,7 +55,7 @@ namespace GameOfChanceSimulator
                 String[] table = System.IO.File.ReadAllLines(filename);
                 logger.Info($"Number of simulations: {table.Length}");
                 string[] winner = CountWinRatio(filename);
-                logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}");
+                logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
             }
             else
             {
@@ -71,17 +71,14 @@ namespace GameOfChanceSimulator
 
             foreach (string line in table)
             {
-                List<string> temp = new List<string>(line.Split(" "));
+                List<string> temp = new List<string>(line.Split(";"));
                 for (int i = 0; i < temp.Count; i++)
                 {
-                    if (temp[i] == "Ranking:")
-                    {
-                        if (myDict.ContainsKey(temp[i + 1]))
-                            myDict[temp[i + 1]]++;
-                        else
-                            myDict.Add(new KeyValuePair<string, int>(temp[i + 1], 1));
-                        break;
-                    }
+                    if (myDict.ContainsKey(temp[i]))
+                        myDict[temp[i]]++;
+                    else
+                        myDict.Add(new KeyValuePair<string, int>(temp[i], 1));
+                    break;
                 }
             }
 
@@ -98,7 +95,7 @@ namespace GameOfChanceSimulator
                 }
             }
 
-            string[] result = {win_name, (win_points/sum *100).ToString()};
+            string[] result = {win_name, Math.Round(win_points/sum *100, 2).ToString()};
             return result;
         }
     }
