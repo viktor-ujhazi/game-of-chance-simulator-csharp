@@ -13,7 +13,7 @@ namespace GameOfChanceSimulator
         
         public Race()
         {
-            chooseRacers(all());
+            all();
         }
 
         public List<RaceCar> all()
