@@ -30,6 +30,7 @@ namespace GameOfChanceSimulator
         //IReadOnlyList<HistoricalDataPoint> DataPoints { get { return dataPoints.AsReadOnly(); } }
 
         private ILogger logger;
+        public string filename = "history.csv";
 
         public HistoricalDataSet(ILogger logger)
         {
@@ -41,12 +42,15 @@ namespace GameOfChanceSimulator
         {
             HistoricalDataPoint data = new HistoricalDataPoint();
             DataPoints.Add(data);
+            
             logger.Info($"Ranking: {data.Ranking}");
+            System.IO.File.WriteAllText(filename, data.Ranking);
+
         }
 
         public void Load(HistoricalDataSet dataset)
         {
-            string filename = "history.csv";
+            
             if (System.IO.File.Exists(filename))
             {
                 String[] table = System.IO.File.ReadAllLines(filename);
@@ -82,7 +86,7 @@ namespace GameOfChanceSimulator
                         myDict[temp[i]]++;
                     else
                         myDict.Add(new KeyValuePair<string, int>(temp[i], 1));
-                    break;
+                   
                 }
             }
 
