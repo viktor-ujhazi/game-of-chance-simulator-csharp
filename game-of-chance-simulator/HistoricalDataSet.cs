@@ -44,7 +44,7 @@ namespace GameOfChanceSimulator
             DataPoints.Add(data);
             
             logger.Info($"Ranking: {data.Ranking}");
-            System.IO.File.WriteAllText(filename, data.Ranking);
+            System.IO.File.AppendAllText(filename, data.Ranking);
 
         }
 

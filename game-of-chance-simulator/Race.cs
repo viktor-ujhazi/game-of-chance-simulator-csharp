@@ -68,6 +68,7 @@ namespace GameOfChanceSimulator
             string ranking;
             string[] racers1 = new string[3];
             
+            
             for (int i = 0; i < racers1.Length; i++)
             {
                 racers1[i] = racers[i].Name;
