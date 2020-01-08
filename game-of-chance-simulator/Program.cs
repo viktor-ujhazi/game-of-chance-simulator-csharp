@@ -30,7 +30,7 @@ namespace GameOfChanceSimulator
             try 
             {
                 int arg1 = 0;
-                int.TryParse(args[1], out arg1);
+                int.TryParse(args[0], out arg1);
                 logger.Info($"Generating {arg1} rounds of data.");
                 for (int i = 0; i < arg1; i++)
                 {
@@ -38,11 +38,13 @@ namespace GameOfChanceSimulator
                     dataSet.Generate();
                 }
                 logger.Info($"Generated {arg1} rounds of data.");
-
+                
+                string[] winner = dataSet.CountWinRatio(dataSet.DataPoints);
+                logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
             }
             catch
             {
-                dataSet.Load();
+                dataSet.Load(dataSet);
             }
             
                       

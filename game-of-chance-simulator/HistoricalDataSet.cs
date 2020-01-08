@@ -26,24 +26,25 @@ namespace GameOfChanceSimulator
     {
         private int size;
         int Size { get { return size; } }
-        private List<HistoricalDataPoint> dataPoints;
-        IReadOnlyList<HistoricalDataPoint> DataPoints { get { return dataPoints.AsReadOnly(); } }
+        public List<HistoricalDataPoint> DataPoints = new List<HistoricalDataPoint>();
+        //IReadOnlyList<HistoricalDataPoint> DataPoints { get { return dataPoints.AsReadOnly(); } }
 
         private ILogger logger;
 
         public HistoricalDataSet(ILogger logger)
         {
             this.logger = logger;
+            
         }
 
         public void Generate()
         {
             HistoricalDataPoint data = new HistoricalDataPoint();
-            dataPoints.Add(data);
-
+            DataPoints.Add(data);
+            logger.Info($"Ranking: {data.Ranking}");
         }
 
-        public void Load()
+        public void Load(HistoricalDataSet dataset)
         {
             string filename = "history.csv";
             if (System.IO.File.Exists(filename))
@@ -52,11 +53,11 @@ namespace GameOfChanceSimulator
                 foreach (string item in table)
                 {
                     HistoricalDataPoint data = new HistoricalDataPoint(item);
-                    dataPoints.Add(data);
+                    dataset.DataPoints.Add(data);
                 }
                 //-RESULT
                 logger.Info($"Number of simulations: {table.Length}");
-                string[] winner = CountWinRatio(dataPoints);
+                string[] winner = CountWinRatio(DataPoints);
                 logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
                 
             }
@@ -74,7 +75,7 @@ namespace GameOfChanceSimulator
 
             foreach (HistoricalDataPoint line in table)
             {
-                List<string> temp = new List<string>(line.Ranking);
+                List<string> temp = new List<string>(line.Ranking.Split(";"));
                 for (int i = 0; i < temp.Count; i++)
                 {
                     if (myDict.ContainsKey(temp[i]))
