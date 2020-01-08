@@ -20,7 +20,7 @@ namespace GameOfChanceSimulator
         public HistoricalDataPoint()
         {
             Race race1 = new Race();
-            Ranking = race1.winner(race1.chooseRacers(race1.all()));
+            Ranking = race1.winner(race1.racers);
 
         }
         
