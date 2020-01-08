@@ -15,7 +15,7 @@ namespace GameOfChanceSimulator
     {
 
         //List<string> racers = new List<string>() ;
-        public string racers;
+        public string racers { get; set; }
         public string Ranking { get; set; } 
 
         public HistoricalDataPoint()
