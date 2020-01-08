@@ -45,7 +45,6 @@ namespace GameOfChanceSimulator
             logger.Info($"Racers: {data.racers}");
             logger.Info($"Ranking: {data.Ranking}");
             System.IO.File.AppendAllText(filename, data.Ranking + "\n");
-
         }
 
         public void Load(HistoricalDataSet dataset)
