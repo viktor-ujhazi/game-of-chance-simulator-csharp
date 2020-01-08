@@ -38,24 +38,27 @@ namespace GameOfChanceSimulator
 
         public void Generate()
         {
-            
-
-
-            //logger.Info("");
-            //var randomString = strings.PickRandom();
+            HistoricalDataPoint data = new HistoricalDataPoint();
+            dataPoints.Add(data);
 
         }
 
         public void Load()
         {
-            
             string filename = "history.csv";
             if (System.IO.File.Exists(filename))
             {
                 String[] table = System.IO.File.ReadAllLines(filename);
+                foreach (string item in table)
+                {
+                    HistoricalDataPoint data = new HistoricalDataPoint(item);
+                    dataPoints.Add(data);
+                }
+                //-RESULT
                 logger.Info($"Number of simulations: {table.Length}");
-                string[] winner = CountWinRatio(filename);
+                string[] winner = CountWinRatio(dataPoints);
                 logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
+                
             }
             else
             {
@@ -64,14 +67,14 @@ namespace GameOfChanceSimulator
             
         }
 
-        public string[] CountWinRatio(string filename)
+        public string[] CountWinRatio(List<HistoricalDataPoint> table)
         {
-            String[] table = System.IO.File.ReadAllLines(filename);
+            //String[] table = System.IO.File.ReadAllLines(filename);
             IDictionary<string, int> myDict = new Dictionary<string, int>();
 
-            foreach (string line in table)
+            foreach (HistoricalDataPoint line in table)
             {
-                List<string> temp = new List<string>(line.Split(";"));
+                List<string> temp = new List<string>(line.Ranking);
                 for (int i = 0; i < temp.Count; i++)
                 {
                     if (myDict.ContainsKey(temp[i]))
