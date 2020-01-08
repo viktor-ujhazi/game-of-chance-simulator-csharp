@@ -38,6 +38,7 @@ namespace GameOfChanceSimulator
                     dataSet.Generate();
                 }
                 logger.Info($"Generated {arg1} rounds of data.");
+
             }
             catch
             {

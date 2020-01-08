@@ -16,8 +16,9 @@ namespace GameOfChanceSimulator
         int Number { get; set; }
         List<string> racers = new List<string>();
 
-        public HistoricalDataPoint()
+        public HistoricalDataPoint(string ranking)
         {
+
 
         }
     }
