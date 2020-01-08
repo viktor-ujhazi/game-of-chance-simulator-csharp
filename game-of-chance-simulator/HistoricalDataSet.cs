@@ -42,9 +42,9 @@ namespace GameOfChanceSimulator
         {
             HistoricalDataPoint data = new HistoricalDataPoint();
             DataPoints.Add(data);
-            
+            logger.Info($"Racers: {data.racers}");
             logger.Info($"Ranking: {data.Ranking}");
-            System.IO.File.WriteAllText(filename, data.Ranking);
+            System.IO.File.AppendAllText(filename, data.Ranking + "\n");
 
         }
 

@@ -23,7 +23,7 @@ namespace GameOfChanceSimulator
             Race race1 = new Race();
             Ranking = race1.winner(race1.racers);
             string[] racer = new string[3];
-            for (int i = 0; i < racers.Length; i++)
+            for (int i = 0; i < racer.Length; i++)
             {
                 racer[i] = race1.racers[i].Name;
             }
