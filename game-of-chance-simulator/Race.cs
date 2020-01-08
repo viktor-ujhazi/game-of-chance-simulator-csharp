@@ -63,13 +63,16 @@ namespace GameOfChanceSimulator
             return racers;
         }
 
-        public RaceCar[] winner(RaceCar[] racers)
+        public string[] winner(RaceCar[] racers)
         {
+            string[] ranking = new string[3];
+            for (int i = 0; i < racers.Length; i++)
+            {
+                ranking[i] = racers[i].Name;
+            }       
+            
 
-            Random rnd = new Random();
-            int w = rnd.Next(0, 3);
-
-            return racers;
+            return ranking;
         }
 
     }

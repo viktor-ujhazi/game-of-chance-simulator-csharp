@@ -14,13 +14,13 @@ namespace GameOfChanceSimulator
     class HistoricalDataPoint
     {
         
-        List<string> racers = new List<string>() ;
-        public string Ranking { get; set; }
+        //List<string> racers = new List<string>() ;
+        public string[] Ranking = new string[3] 
 
         public HistoricalDataPoint()
         {
             Race race1 = new Race();
-            race1.winner(race1.chooseRacers(race1.all()));
+            Ranking = race1.winner(race1.chooseRacers(race1.all()));
 
         }
         
