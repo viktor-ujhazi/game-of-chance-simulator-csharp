@@ -20,8 +20,23 @@ namespace GameOfChanceSimulator
     {
         DataEvaluator(HistoricalDataSet historical, ILogger logger)
         {
+            
         }
 
+
+        public Result Run(List<HistoricalDataPoint> DataPoints)
+        {
+
+            int numberOfSimulations=0;
+            string bestChoice="";
+            float bestChoiceChance=0;
+
+            Result result = new Result( numberOfSimulations, bestChoice, bestChoiceChance);
+
+
+            return result;
+
+        }
         
     }
 }

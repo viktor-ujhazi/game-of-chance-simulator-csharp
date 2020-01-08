@@ -16,27 +16,37 @@ namespace GameOfChanceSimulator
     {
         static void Main(string[] args)
         {
-            HistoricalDataSet dataSet = GenerateHistoricalDataSet(Int32.Parse(args[1]));
+            
+            
+            HistoricalDataSet dataSet = GenerateHistoricalDataSet(args);
 
         }
         
-        public static HistoricalDataSet GenerateHistoricalDataSet(int input)
+        public static HistoricalDataSet GenerateHistoricalDataSet(string[] args)
         {
             ConsoleLogger logger = new ConsoleLogger();
             HistoricalDataSet dataSet = new HistoricalDataSet(logger);
-
-            if (input > 0)
+            
+            try 
             {
-                logger.Info($"Generating {input} rounds of data.");
-                for (int i = 0; i < input; i++)
+                int arg1 = 0;
+                int.TryParse(args[1], out arg1);
+                logger.Info($"Generating {arg1} rounds of data.");
+                for (int i = 0; i < arg1; i++)
                 {
                     logger.Info("Generating 1 round of data.");
                     dataSet.Generate();
                 }
-                logger.Info($"Generated {input} rounds of data.");
+                logger.Info($"Generated {arg1} rounds of data.");
             }
-            else
-                return dataSet.Load();
+            catch
+            {
+                dataSet.Load();
+            }
+            
+                      
+            
+            return dataSet;
         }
     }
 }

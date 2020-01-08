@@ -14,5 +14,11 @@ namespace GameOfChanceSimulator
     class HistoricalDataPoint
     {
         int Number { get; set; }
+        List<string> racers = new List<string>();
+
+        public HistoricalDataPoint()
+        {
+
+        }
     }
 }

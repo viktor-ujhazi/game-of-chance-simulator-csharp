@@ -48,11 +48,20 @@ namespace GameOfChanceSimulator
 
         public void Load()
         {
+            
             string filename = "history.csv";
-            String[] table = System.IO.File.ReadAllLines(filename);
-            logger.Info($"Number of simulations: {table.Length}");
-            string[] winner = CountWinRatio(filename);
-            logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}");
+            if (System.IO.File.Exists(filename))
+            {
+                String[] table = System.IO.File.ReadAllLines(filename);
+                logger.Info($"Number of simulations: {table.Length}");
+                string[] winner = CountWinRatio(filename);
+                logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}");
+            }
+            else
+            {
+                logger.Error($"{filename} file does not exist.");
+            }
+            
         }
 
         public string[] CountWinRatio(string filename)
