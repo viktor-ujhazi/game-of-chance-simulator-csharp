@@ -18,9 +18,11 @@ namespace GameOfChanceSimulator
 {
     class DataEvaluator
     {
-        DataEvaluator(HistoricalDataSet historical, ILogger logger)
+        private ILogger logger;
+
+        public DataEvaluator(HistoricalDataSet historical, ILogger logger)
         {
-            
+            this.logger = logger;
         }
 
 
