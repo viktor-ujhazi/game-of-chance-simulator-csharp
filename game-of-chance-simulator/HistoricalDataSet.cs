@@ -70,39 +70,5 @@ namespace GameOfChanceSimulator
             
         }
 
-        public string[] CountWinRatio(List<HistoricalDataPoint> table)
-        {
-            //String[] table = System.IO.File.ReadAllLines(filename);
-            IDictionary<string, int> myDict = new Dictionary<string, int>();
-
-            foreach (HistoricalDataPoint line in table)
-            {
-                List<string> temp = new List<string>(line.Ranking.Split(";"));
-                for (int i = 0; i < temp.Count; i++)
-                {
-                    if (myDict.ContainsKey(temp[i]))
-                        myDict[temp[i]]++;
-                    else
-                        myDict.Add(new KeyValuePair<string, int>(temp[i], 1));
-                   
-                }
-            }
-
-            float sum = 0;
-            string win_name = "";
-            int win_points = 0;
-            foreach (KeyValuePair<string, int> key in myDict)
-            {
-                sum += key.Value;
-                if (key.Value > win_points)
-                {
-                    win_name = key.Key;
-                    win_points = key.Value;
-                }
-            }
-
-            string[] result = {win_name, Math.Round(win_points/sum *100, 2).ToString()};
-            return result;
-        }
     }
 }

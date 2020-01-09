@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
+using System.IO;
 
 namespace GameOfChanceSimulator
 {
     class Race
     {
+        private static string racersCSV = "Fantastic_Racers.csv";
         public List<RaceCar> allracers { get; } = new List<RaceCar>();
         public RaceCar[] racers { get; } = new RaceCar[3];
 
@@ -19,16 +20,21 @@ namespace GameOfChanceSimulator
 
         public List<RaceCar> all()
         {
-            string[] csvRacers = System.IO.File.ReadAllLines("Fantastic_Racers.csv");
-
-            foreach (var item in csvRacers)
+            if (System.IO.File.Exists(racersCSV))
             {
-                string[] values = item.Split(";");
-                
-                RaceCar r = new RaceCar(values[0], Int32.Parse(values[1]), Int32.Parse(values[2]), float.Parse(values[3]));
-                allracers.Add(r);
+                string[] csvRacers = System.IO.File.ReadAllLines(racersCSV);
+
+                foreach (var item in csvRacers)
+                {
+                    string[] values = item.Split(";");
+
+                    RaceCar r = new RaceCar(values[0], Int32.Parse(values[1]), Int32.Parse(values[2]), float.Parse(values[3]));
+                    allracers.Add(r);
+                }
             }
-            
+            else
+            {
+                throw new FileNotFoundException ("File not found", racersCSV);            }
             return allracers;
         }
 
@@ -54,10 +60,6 @@ namespace GameOfChanceSimulator
                         e = true;
                     }
                 } while (!e);
-                
-                
-
-
                 racers[i] = allracers[picked[i]];
             }
 

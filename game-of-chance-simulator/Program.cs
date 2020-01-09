@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GameOfChanceSimulator
 {
@@ -16,49 +17,50 @@ namespace GameOfChanceSimulator
     {
         static void Main(string[] args)
         {
-            
-            
             HistoricalDataSet dataSet = GenerateHistoricalDataSet(args);
-            DataEvaluator dataEvaluator = new DataEvaluator(dataSet, new ConsoleLogger());
-
+            new DataEvaluator(dataSet, new ConsoleLogger());
         }
         
         public static HistoricalDataSet GenerateHistoricalDataSet(string[] args)
         {
             ConsoleLogger logger = new ConsoleLogger();
             HistoricalDataSet dataSet = new HistoricalDataSet(logger);
-            Race race = new Race();
-            int arg1 = 0;
-            string str = "";
-            for (int i = 0; i < race.allracers.Count; i++)
+            try
             {
-                if (race.allracers.Count == i + 1)
-                    str += race.allracers[i].Name;
-                else
-                    str += race.allracers[i].Name + ", ";
-            }
-            
-            if (args.Length > 0 && int.TryParse(args[0], out arg1))
-            {
-                logger.Info($"Cars participating: {str}");
-                logger.Info($"Generating {arg1} rounds of data.");
-                for (int i = 0; i < arg1; i++)
+                Race race = new Race();
+                int arg1 = 0;
+                string str = "";
+                for (int i = 0; i < race.allracers.Count; i++)
                 {
-                    logger.Info("Generating 1 round of data.");
-                    dataSet.Generate();
+                    if (race.allracers.Count == i + 1)
+                        str += race.allracers[i].Name;
+                    else
+                        str += race.allracers[i].Name + ", ";
                 }
-                logger.Info($"Generated {arg1} rounds of data.");
 
+                if (args.Length > 0 && int.TryParse(args[0], out arg1))
+                {
+                    logger.Info($"Cars participating: {str}");
+                    logger.Info($"Generating {arg1} rounds of data.");
+                    for (int i = 0; i < arg1; i++)
+                    {
+                        logger.Info("Generating 1 round of data.");
+                        dataSet.Generate();
+                    }
+                    logger.Info($"Generated {arg1} rounds of data.");
+
+                }
+                else
+                {
+                    dataSet.Load(dataSet);
+                }
             }
-            else
+            catch (FileNotFoundException e)
             {
-                dataSet.Load(dataSet);
-            }
-            
                 
-                //string[] winner = dataSet.CountWinRatio(dataSet.DataPoints);
-                //logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
-                      
+                logger.Error($"{e.Message}:  {e.FileName}");
+                System.Environment.Exit(0);
+            }
             
             return dataSet;
         }
