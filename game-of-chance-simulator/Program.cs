@@ -38,15 +38,15 @@ namespace GameOfChanceSimulator
                     dataSet.Generate();
                 }
                 logger.Info($"Generated {arg1} rounds of data.");
-                
-                string[] winner = dataSet.CountWinRatio(dataSet.DataPoints);
-                logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
             }
             catch
             {
                 dataSet.Load(dataSet);
             }
             
+                
+                string[] winner = dataSet.CountWinRatio(dataSet.DataPoints);
+                logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
                       
             
             return dataSet;

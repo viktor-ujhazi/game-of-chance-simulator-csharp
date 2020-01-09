@@ -10,8 +10,8 @@
     <None Update="Fantastic_Racers.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="history.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Update="History.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Try.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
