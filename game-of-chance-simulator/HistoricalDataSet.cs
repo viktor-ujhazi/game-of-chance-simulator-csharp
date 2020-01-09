@@ -24,10 +24,9 @@ namespace GameOfChanceSimulator
 {
     class HistoricalDataSet
     {
-        private int size;
-        int Size { get { return size; } }
-        public List<HistoricalDataPoint> DataPoints = new List<HistoricalDataPoint>();
-        //IReadOnlyList<HistoricalDataPoint> DataPoints { get { return dataPoints.AsReadOnly(); } }
+        
+        private List<HistoricalDataPoint> dataPoints = new List<HistoricalDataPoint>();
+        public IReadOnlyList<HistoricalDataPoint> DataPoints { get { return dataPoints.AsReadOnly(); } }
 
         private ILogger logger;
         public string filename = "history.csv";
@@ -41,7 +40,7 @@ namespace GameOfChanceSimulator
         public void Generate()
         {
             HistoricalDataPoint data = new HistoricalDataPoint();
-            DataPoints.Add(data);
+            dataPoints.Add(data);
             logger.Info($"Racers: {data.racers}");
             logger.Info($"Ranking: {data.Ranking}");
             System.IO.File.AppendAllText(filename, data.Ranking + "\n");
@@ -56,7 +55,7 @@ namespace GameOfChanceSimulator
                 foreach (string item in table)
                 {
                     HistoricalDataPoint data = new HistoricalDataPoint(item);
-                    dataset.DataPoints.Add(data);
+                    dataset.dataPoints.Add(data);
                 }
                 //-RESULT
                 //logger.Info($"Number of simulations: {table.Length}");

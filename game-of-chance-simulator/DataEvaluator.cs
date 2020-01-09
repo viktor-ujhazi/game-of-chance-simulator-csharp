@@ -18,8 +18,7 @@ namespace GameOfChanceSimulator
 {
     class DataEvaluator
     {
-        private ILogger logger;
-
+       
         public DataEvaluator(HistoricalDataSet historical, ILogger logger)
         {
             
@@ -29,7 +28,7 @@ namespace GameOfChanceSimulator
         }
 
 
-        public Result Run(List<HistoricalDataPoint> DataPoints)
+        public Result Run(IReadOnlyList<HistoricalDataPoint> DataPoints)
         {
 
             IDictionary<string, int> myDict = new Dictionary<string, int>();
