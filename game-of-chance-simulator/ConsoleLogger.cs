@@ -1,4 +1,4 @@
-/* 
+ /* 
     - ConsoleLogger implements the ILogger interface and both the interface's virtual methods.
     - ConsoleLogger contains the constructor: ConsoleLogger(). Note: there shouldn't be other 
         constructor declared on this class.

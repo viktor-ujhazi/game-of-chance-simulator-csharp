@@ -26,6 +26,17 @@ namespace GameOfChanceSimulator
         {
             ConsoleLogger logger = new ConsoleLogger();
             HistoricalDataSet dataSet = new HistoricalDataSet(logger);
+            Race race = new Race();
+
+            string str = "";
+            for (int i = 0; i < race.allracers.Count; i++)
+            {
+                if (race.allracers.Count == i + 1)
+                    str += race.allracers[i].Name;
+                else
+                    str += race.allracers[i].Name + ", ";
+            }
+            logger.Info($"Cars participating: {str}");
             
             try 
             {
