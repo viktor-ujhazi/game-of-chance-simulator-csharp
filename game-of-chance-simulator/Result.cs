@@ -20,11 +20,11 @@ namespace GameOfChanceSimulator
 {
     class Result
     {
-        int NumberOfSimulations { get; }
-        string BestChoice { get; }
-        float BestChoiceChance { get; }
+        public int NumberOfSimulations { get; }
+        public string BestChoice { get; }
+        public double BestChoiceChance { get; }
 
-        public Result(int numberOfSimulations, string bestChoice, float bestChoiceChance)
+        public Result(int numberOfSimulations, string bestChoice, double bestChoiceChance)
         {
             NumberOfSimulations = numberOfSimulations;
             BestChoice = bestChoice;

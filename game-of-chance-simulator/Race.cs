@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 
 namespace GameOfChanceSimulator
@@ -65,16 +66,26 @@ namespace GameOfChanceSimulator
 
         public string winner(RaceCar[] racers)
         {
-            string ranking;
-            string[] racers1 = new string[3];
+            string ranking="";
             
+            Dictionary<string, double> racersPoints = new Dictionary<string, double>();
+            List<string> orderedRacersName = new List<string>();
             
-            for (int i = 0; i < racers1.Length; i++)
+            for (int i = 0; i < racers.Length; i++)
             {
-                racers1[i] = racers[i].Name;
+                double points = racers[i].Speed * (10 - racers[i].Acceleration) * (10 - racers[i].Reaction);
+                string name = racers[i].Name;
+                racersPoints.Add(name, points);
+
             }
-            ranking = string.Join(";",racers1);
-            
+            var ordered = racersPoints.OrderBy(x => x.Value);
+
+            foreach (var item in ordered)
+            {
+                orderedRacersName.Add(item.Key);
+
+            }
+            ranking += string.Join(";",orderedRacersName);
 
             return ranking;
         }

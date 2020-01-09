@@ -22,16 +22,47 @@ namespace GameOfChanceSimulator
 
         public DataEvaluator(HistoricalDataSet historical, ILogger logger)
         {
-            this.logger = logger;
+            
+            Result result=Run(historical.DataPoints);
+            logger.Info($"Number of simulations: {result.NumberOfSimulations}");
+            logger.Info($"Result: Car to bet on: {result.BestChoice}, chance of winning: {result.BestChoiceChance}%");
         }
 
 
         public Result Run(List<HistoricalDataPoint> DataPoints)
         {
 
-            int numberOfSimulations=0;
-            string bestChoice="";
-            float bestChoiceChance=0;
+            IDictionary<string, int> myDict = new Dictionary<string, int>();
+
+            foreach (HistoricalDataPoint line in DataPoints)
+            {
+                List<string> temp = new List<string>(line.Ranking.Split(";"));
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    if (myDict.ContainsKey(temp[i]))
+                        myDict[temp[i]]++;
+                    else
+                        myDict.Add(new KeyValuePair<string, int>(temp[i], 1));
+
+                }
+            }
+
+            float sum = 0;
+            string win_name = "";
+            int win_points = 0;
+            foreach (KeyValuePair<string, int> key in myDict)
+            {
+                sum += key.Value;
+                if (key.Value > win_points)
+                {
+                    win_name = key.Key;
+                    win_points = key.Value;
+                }
+            }
+
+            int numberOfSimulations=DataPoints.Count;
+            string bestChoice=win_name;
+            double bestChoiceChance= Math.Round(win_points / sum * 100, 2);
 
             Result result = new Result( numberOfSimulations, bestChoice, bestChoiceChance);
 

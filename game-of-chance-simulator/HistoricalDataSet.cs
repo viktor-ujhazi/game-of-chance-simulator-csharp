@@ -59,9 +59,9 @@ namespace GameOfChanceSimulator
                     dataset.DataPoints.Add(data);
                 }
                 //-RESULT
-                logger.Info($"Number of simulations: {table.Length}");
-                string[] winner = CountWinRatio(DataPoints);
-                logger.Info($"Result: Cars to bet on: {winner[0]} chance of winning: {winner[1]}%");
+                //logger.Info($"Number of simulations: {table.Length}");
+                //string[] winner = CountWinRatio(DataPoints);
+                //logger.Info($"Result: Cars to bet on: {winner[0]} chance of winning: {winner[1]}%");
                 
             }
             else

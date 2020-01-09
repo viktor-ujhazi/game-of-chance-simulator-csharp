@@ -19,6 +19,7 @@ namespace GameOfChanceSimulator
             
             
             HistoricalDataSet dataSet = GenerateHistoricalDataSet(args);
+            DataEvaluator dataEvaluator = new DataEvaluator(dataSet, new ConsoleLogger());
 
         }
         
@@ -27,7 +28,7 @@ namespace GameOfChanceSimulator
             ConsoleLogger logger = new ConsoleLogger();
             HistoricalDataSet dataSet = new HistoricalDataSet(logger);
             Race race = new Race();
-
+            int arg1 = 0;
             string str = "";
             for (int i = 0; i < race.allracers.Count; i++)
             {
@@ -36,12 +37,10 @@ namespace GameOfChanceSimulator
                 else
                     str += race.allracers[i].Name + ", ";
             }
-            logger.Info($"Cars participating: {str}");
             
-            try 
+            if (args.Length > 0 && int.TryParse(args[0], out arg1))
             {
-                int arg1 = 0;
-                int.TryParse(args[0], out arg1);
+                logger.Info($"Cars participating: {str}");
                 logger.Info($"Generating {arg1} rounds of data.");
                 for (int i = 0; i < arg1; i++)
                 {
@@ -49,15 +48,16 @@ namespace GameOfChanceSimulator
                     dataSet.Generate();
                 }
                 logger.Info($"Generated {arg1} rounds of data.");
+
             }
-            catch
+            else
             {
                 dataSet.Load(dataSet);
             }
             
                 
-                string[] winner = dataSet.CountWinRatio(dataSet.DataPoints);
-                logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
+                //string[] winner = dataSet.CountWinRatio(dataSet.DataPoints);
+                //logger.Info($"Result: {winner[0]} chance of winning: {winner[1]}%");
                       
             
             return dataSet;
