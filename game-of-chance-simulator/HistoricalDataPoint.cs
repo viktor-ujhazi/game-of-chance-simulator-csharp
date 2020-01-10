@@ -13,8 +13,7 @@ namespace GameOfChanceSimulator
 {
     class HistoricalDataPoint
     {
-
-        
+               
         public string racers { get; set; }
         public string Ranking { get; set; } 
 
@@ -29,7 +28,6 @@ namespace GameOfChanceSimulator
             }
             racers = string.Join(";",racer);
         }
-        
         
         public HistoricalDataPoint(string ranking)
         {
