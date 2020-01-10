@@ -50,15 +50,24 @@ namespace GameOfChanceSimulator
                     logger.Info($"Generated {arg1} rounds of data.");
 
                 }
-                else
+                else if (args.Length==0)
                 {
                     dataSet.Load(dataSet);
+                }
+                else
+                {
+                    throw new ArgumentException("Argument not valid.");
                 }
             }
             catch (FileNotFoundException e)
             {
                 
                 logger.Error($"{e.Message}:  {e.FileName}");
+                System.Environment.Exit(0);
+            }
+            catch (ArgumentException e)
+            {
+                logger.Error(e.Message);
                 System.Environment.Exit(0);
             }
             
