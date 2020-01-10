@@ -19,7 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.IO;
 namespace GameOfChanceSimulator
 {
     class HistoricalDataSet
@@ -65,7 +65,7 @@ namespace GameOfChanceSimulator
             }
             else
             {
-                logger.Error($"{filename} file does not exist.");
+                throw new FileNotFoundException("File not found", filename);
             }
             
         }
